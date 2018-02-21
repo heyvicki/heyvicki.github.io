@@ -1,1 +1,156 @@
-Hello World
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8" />
+  <title>Vicki | Control your web browser with Alexa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
+  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/jpailehnpmjbaolepjhmfcoelefljcln">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="res/index.css">
+  <link rel="prefetch" href="res/page.jpg" />
+  <link rel="prefetch" href="res/mario.jpg" />
+  <link rel="prefetch" href="res/pizza.jpg" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <span style="padding-top: 24px; display: inline-block;">
+        <a href="http://heyvicki.net" class="site-header-logo">
+          <img src="res/vicki.svg" />
+          VICKI
+        </a>
+      </span>
+
+      <nav class="site-header-nav">
+        <a href="#setup">Setup</a>
+        <a href="#scripts">Scripts</a>
+        <a href="#develop">Develop</a>
+        <a href="mailto:pavel@heyvicki.net">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <section class="hero">
+    <div class="container text-center" style="position: relative;">
+      <div id="hero-image-container">
+        <img id="hero-image" src="res/laptop-echo-dimmed.png" />
+      </div>
+      <div id="hero-overlay-container">
+        <div id="echo-bright"></div>
+        <div id="screen-overlay"></div>
+        <div id="text-overlay">
+          <div>
+            Alexa, ask web browser to
+          </div>
+          <div id="hero-command">
+            scroll down
+          </div>
+        </div>
+        <div id="laptop-highlight"></div>
+      </div>
+
+      <div class="hero-lead">
+        Control your web browser through Alexa
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section bg-shade">
+    <div class="container text-center">
+      <h1><a name="setup"></a>Get Started</h1>
+      <p class="lead">
+        To get started, enable Vicki on both Alexa and on your web browser with your Amazon account.
+        <br />
+        <br />
+        <p class="install-buttons">
+          <a class="btn" href="http://amazon.com" target="_blank" style="width: 250px;">
+            Enable Alexa skill
+          </a>
+
+          <span>&amp;</span>
+
+          <a id="enable-browser-btn" class="btn" href="#" style="width: 250px;">
+            Install browser extension
+          </a>
+        </p>
+      </p>
+
+      <br />
+      <p class="lead">
+        After your Amazon account is linked on both places, just say <span style="white-space: nowrap;">"Alexa, ask web browser to browse amazon"</span>.
+      </p>
+      <p class="lead">
+        To see all the things you can ask Vicki, click "manage scripts" on the browser extension.
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="container-narrow text-center">
+      <h1><a name="scripts"></a>Scripts for Vicki</h1>
+      <p class="lead">
+        Search the web for user created VickiScripts. Here are some good places to start.
+        <hr />
+        <div>
+          <a href='https://github.com/search?l=JavaScript&q="%2F%2F+%3D%3DVickiScript%3D%3D"&type=Code' class="scripts-link"><img src="res/logo-github.svg" /></a>
+
+          <a href="https://gist.github.com/search?l=JavaScript&q=%22%2F%2F+%3D%3DVickiScript%3D%3D%22&ref=searchresults&utf8=%E2%9C%93" class="scripts-link">
+            <img src="res/logo-gist.svg" />
+          </a>
+        </div>
+      </p>
+    </div>
+  </section>
+
+  <section class="page-section bg-shade">
+    <div class="container-narrow text-center">
+      <h1>
+<a name="develop"></a>Write your own script</h1>
+
+<p class="lead">
+Write javascript to answer requests from Alexa on your browser. Here is an example.
+</p>
+      <pre>
+        <code class="javascript" style="text-align: left; border-radius: 4px; padding: 20px">/// ==VickiScript==
+/// @name Hello World
+/// @utterance Tell $invocation hello
+/// ==/VickiScript==
+
+$vs.listen(async (request, response) => {
+  // A alexa request came in!
+
+  if (request.utterance !== "hello") {
+    // We can't answer this request.
+    return;
+  }
+
+  // Open hello world wiki page on a new tab.
+  const url = "https://en.wikipedia.org/wiki/%22Hello,_World!%22_program";
+  await browser.tabs.create({ url });
+  
+  // Make Alexa say "Hello World"
+  response.say("Hello World").send();
+});</code>
+      </pre>
+
+      <p class="lead">
+ See the <a href="https://github.com/heyvicki/vicki-browser-ext/blob/master/docs/vickiscript.asciidoc">Developer Guide</a> to start developing.
+      </p>
+    </div>
+  </section>
+
+
+  <section class="page-section text-center">
+    <p><a name="contact"></a>
+      For any bugs or feature request, use the <a href="https://github.com/heyvicki/vicki-browser-ext/issues">GitHub issues page</a>.
+      <br /><br />
+      For private communication, contact <a href="mailto:pavel@heyvicki.net">pavel@heyvicki.net</a>.
+    </p>
+  </section>
+
+<script src="res/index.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>
