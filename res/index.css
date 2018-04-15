@@ -126,15 +126,37 @@ body {
   opacity: 0;
 }
 
-#screen-overlay {
+.screen-overlay {
   position: absolute;
-  background-color: #fff;
+  background-color: #2f3241;
+  left: 0px;
+  top: 0px;
+  width: 570px;
+  height: 355px;
+  transition: background-position 1s;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
+}
+
+#screen-overlay-container {
+  overflow: hidden;;
+  position: absolute;
+  background-color: #2f3241;
   left: 480px;
   top: 29px;
   width: 570px;
   height: 355px;
-  transition: background-position 1s;
-  opacity: 0;
+}
+
+@keyframes screen-animate-in {
+    from {
+      opacity: 0;
+      transform: translateY(60px) scale(0.8, 0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
 }
 
 #laptop-highlight {
@@ -144,17 +166,18 @@ body {
   top: -20px;
   width: 238px;
   height: 396px;
+  z-index: 100;
 }
 
 #text-overlay {
   left: -13px;
-  top: 80px;
+  top: 70px;
   width: 400px;
   height: 90px;
 
   position: absolute;
   overflow: hidden;
-  font-size: 1.75rem;
+  font-size: 2.2rem;
 
   opacity: 0;
   transition: opacity 0.3s, transform 0.6s;
@@ -277,6 +300,7 @@ p a:hover {
   background: transparent;
   border-color: #20515b;
   border-radius: 0.25em;
+  text-decoration: none;
 }
 
 .btn:hover, .btn:active {
@@ -303,21 +327,30 @@ p a:hover {
   height: 70px;
 }
 
-.install-buttons span {
-  display: block;
-  margin: 10px 30px;
-  font-size: 20px;
+
+.install-button-row {
+  height: 60px; 
+  width: 350px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-@media (min-width: 766px) {
-  .install-buttons {
-    white-space: nowrap;
-  }
+.install-button-row .btn {
+  margin-left: 50px;
+  width: 250px;
+}
 
-  .install-buttons span {
-    display: inline;
-  }
+.install-button-row span {
+  font-size: 20px;
+  position: absolute;
+  left: 0px;
+  top: 10px;
 }
 
 .hljs{display:block;overflow-x:auto;padding:0.5em;color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-keyword,.hljs-formula{color:#c678dd}.hljs-section,.hljs-name,.hljs-selector-tag,.hljs-deletion,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-string,.hljs-regexp,.hljs-addition,.hljs-attribute,.hljs-meta-string{color:#98c379}.hljs-built_in,.hljs-class .hljs-title{color:#e6c07b}.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-type,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-number{color:#d19a66}.hljs-symbol,.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-title{color:#61aeee}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}.hljs-link{text-decoration:underline}
 
+.footnote {
+  font-size: 15px;
+  opacity: 0.6;
+}

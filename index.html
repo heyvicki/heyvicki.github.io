@@ -2,15 +2,13 @@
 <html lang="en-US">
 <head>
   <meta charset="utf-8" />
-  <title>Vicki | Control your web browser with Alexa</title>
+  <title>Vicki | Control your computer with Alexa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
   <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/jpailehnpmjbaolepjhmfcoelefljcln">
   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
   <link rel="stylesheet" href="res/index.css">
-  <link rel="prefetch" href="res/page.jpg" />
-  <link rel="prefetch" href="res/mario.jpg" />
-  <link rel="prefetch" href="res/pizza.jpg" />
+  <link rel="prefetch" href="res/screens/page.jpg" />
 </head>
 <body>
   <header class="site-header">
@@ -26,6 +24,7 @@
         <a href="#setup">Setup</a>
         <a href="#scripts">Scripts</a>
         <a href="#develop">Develop</a>
+        <a href="#qa">Q/A</a>
         <a href="mailto:pavel@heyvicki.net">Contact</a>
       </nav>
     </div>
@@ -37,12 +36,12 @@
       </div>
       <div id="hero-overlay-container">
         <div id="echo-bright"></div>
-        <div id="screen-overlay"></div>
+        <div id="screen-overlay-container"></div>
         <div id="text-overlay">
-          <div>
+          <div id="hero-command-1">
             Alexa, ask web browser to
           </div>
-          <div id="hero-command">
+          <div id="hero-command-2">
             scroll down
           </div>
         </div>
@@ -50,7 +49,7 @@
       </div>
 
       <div class="hero-lead">
-        Control your web browser through Alexa
+        Control your computer through Alexa
       </div>
     </div>
   </section>
@@ -59,28 +58,38 @@
     <div class="container text-center">
       <h1><a name="setup"></a>Get Started</h1>
       <p class="lead">
-        To get started, enable Vicki on both Alexa and on your web browser with your Amazon account.
-        <br />
+        To get started, follow the steps below on your computer.
         <br />
         <p class="install-buttons">
-          <a class="btn" href="http://amazon.com" target="_blank" style="width: 250px;">
-            Enable Alexa skill
-          </a>
 
-          <span>&amp;</span>
+          <div class="install-button-row">
+            <span>Step 1.</span>
+            <a class="btn" href="http://amazon.com" target="_blank">
+              Enable Alexa skill
+            </a>
+          </div>
 
-          <a id="enable-browser-btn" class="btn" href="#" style="width: 250px;">
-            Install browser extension
-          </a>
+          <div class="install-button-row">
+            <span>Step 2.</span>
+            <a id="enable-computer-btn" class="btn" href="#">
+              Install native addon *
+            </a>
+          </div>
+
+          <div class="install-button-row">
+              <span>Step 3.</span>
+              <a id="enable-browser-btn" class="btn" href="#">
+                Install browser extension
+              </a>
+            </div>
+    
+          <br >
         </p>
       </p>
 
       <br />
-      <p class="lead">
-        After your Amazon account is linked on both places, just say <span style="white-space: nowrap;">"Alexa, ask web browser to browse amazon"</span>.
-      </p>
-      <p class="lead">
-        To see all the things you can ask Vicki, click "manage scripts" on the browser extension.
+      <p class="footnote">
+        * Installing the native addon is optional, without it Vicki can only control your web browser.
       </p>
     </div>
   </section>
@@ -116,13 +125,8 @@ Write javascript to answer requests from Alexa on your browser. Here is an examp
 /// @utterance Tell $invocation hello
 /// ==/VickiScript==
 
-$vs.listen(async (request, response) => {
-  // A alexa request came in!
-
-  if (request.utterance !== "hello") {
-    // We can't answer this request.
-    return;
-  }
+$vs.listen(/^hello$/, async (request, response) => {
+  // A alexa request with utterance "hello" came in!
 
   // Open hello world wiki page on a new tab.
   const url = "https://en.wikipedia.org/wiki/%22Hello,_World!%22_program";
@@ -139,6 +143,47 @@ $vs.listen(async (request, response) => {
     </div>
   </section>
 
+  <section class="page-section">
+    <div class="container-narrow">
+      <h1><a name="qa"></a>Q/A</h1>
+
+      <p class="lead">1) How safe is this?</p>
+      <p>Here are the key things you should be aware of:</p>
+
+    	<ul>
+    		<li>Anyone within audible distance of your Echo can control your web browser/computer.</li>
+    		<li>Installing additional VickiScripts enables new functionalities &amp; new risks, install with care.</li>
+    		<li>We (owners of Vicki) cannot send an artificial request to your computer, they must come from Alexa &amp; Amazon.</li>
+    	</ul>
+
+      <p>
+      	<a href="#" onclick="document.getElementById('safety-technical').style.display = ''; this.style.display = 'none'; return false;">See technical details on security</a>
+      </p>
+
+    	<div id="safety-technical" style="display: none;">
+      	<p>Here are some technical details on security:</p>
+      	<ul>
+      		<li>When Alexa sends a request to Vicki, Amazon signs it. We send down this signed request to your computer where it is verified on your computer that it has been signed by Amazon. Amazons public key is downloaded directly from Amazon through HTTPS on your computer.</li>
+      		<li>Vicki relies on Login With Amazon (OAuth) and thus relies on Amazon for your accounts security.</li>
+      		<li>Communication between your computer and Vicki service occurs through HTTPS.</li>
+      		<li>Each VickiScript is run inside a web worker.</li>
+      		<li>Each VickiScript can only interact with your browser/computer for a short duration after receiving a request from Alexa.</li>
+      		<li>VickiScript does not auto-update by default, aside from those pre-packaged with Vicki.</li>
+      		<li>A VickiScript with native permission should be considered same as installing a software on your computer. It will be obvious when you are attempting to install one.</li>
+      		<li>The browser extension communicates with the native addon through standard input/output using Web Extension's Native Addon.</li>
+      		<li>The native addon communicates with a Electron GUI application only through local unix or windows socket.</li> 
+      	</ul>
+      </div>
+
+
+      <p class="lead">2) Can I control multiple computers?</p>
+      <p>Yes, however each Alexa input device (echo) can only communicate with a single computer at a time. To set the preferred target computer say "Alexa, ask web browser to set my preferred vicki" and it will list all connected computers by a name. The name of each computer is listed inside browser extension.</p>
+
+      <p class="lead">3) Can I control my computer from multiple echos?</p>
+      <p>Yes, when you attempt to use your 2nd echo the computer will prompt you to add the echo as a trusted device.</p>
+
+    </div>
+  </section>
 
   <section class="page-section text-center">
     <p><a name="contact"></a>
