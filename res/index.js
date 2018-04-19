@@ -117,7 +117,6 @@
   }
 
   await showCmd("demonstration of Vicki", "Check out this", true);
-  await wait(1);
   await hideCmd();
 
   while (true) {
@@ -168,26 +167,15 @@
 })();
 
 function getOS() {
-  var userAgent = window.navigator.userAgent,
-      platform = window.navigator.platform,
-      macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
-      windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
-      iosPlatforms = ['iPhone', 'iPad', 'iPod'],
-      os = null;
+  const platform = window.navigator.platform;
 
-  if (macosPlatforms.indexOf(platform) !== -1) {
-    os = 'osx';
-  } else if (iosPlatforms.indexOf(platform) !== -1) {
-    os = 'ios';
-  } else if (windowsPlatforms.indexOf(platform) !== -1) {
-    os = 'win';
-  } else if (/Android/.test(userAgent)) {
-    os = 'android';
+  if (["Macintosh", "MacIntel", "MacPPC", "Mac68K"].indexOf(platform) !== -1) {
+    return "osx";
+  } else if (['Win32', 'Win64', 'Windows', 'WinCE'].indexOf(platform) !== -1) {
+    return "win";
   } else if (!os && /Linux/.test(platform)) {
-    os = 'linux';
+    return "linux";
   }
-
-  return os;
 }
 
 function configureInstallBrowserExtension() {
@@ -207,13 +195,13 @@ function configureInstallNativeAddon() {
     win: "https://s3.amazonaws.com/heyvicki-public/vicki-native-addon.exe",
     osx: "https://s3.amazonaws.com/heyvicki-public/Vicki+Native+Addon.pkg"
   };
-  const downloadUrl = downloadUrlPerOs[getOS()];
 
+  const downloadUrl = downloadUrlPerOs[getOS()];
   const downloadBtn = document.getElementById("enable-computer-btn");
 
   if (!downloadUrl) {
     downloadBtn.addEventListener("click", () => {
-      alert("Native addon is not supported on your OS. Try Windows or Mac");
+      alert("Native addon is only supported on Windows and Mac. This is optional, so skip it.");
     });
   } else {
     downloadBtn.setAttribute("href", downloadUrl);

@@ -184,6 +184,10 @@ body {
   transform: translateY(30px);
 }
 
+#text-overlay div {
+  white-space: nowrap;
+}
+
 h1 {
   color: #20515b;
   font-weight: 300;
@@ -346,6 +350,25 @@ p a:hover {
   position: absolute;
   left: 0px;
   top: 10px;
+}
+
+
+.feature-list {
+  padding: 0 50px;
+  margin: 0 auto;
+}
+
+@media (min-width: 992px) {
+  .feature-list {
+    padding: 0 150px;
+    max-width: 1000px;
+  }
+}
+
+.feature-list span {
+  padding-right: 10px;
+  font-style: italic;
+  color: #666;
 }
 
 .hljs{display:block;overflow-x:auto;padding:0.5em;color:#abb2bf;background:#282c34}.hljs-comment,.hljs-quote{color:#5c6370;font-style:italic}.hljs-doctag,.hljs-keyword,.hljs-formula{color:#c678dd}.hljs-section,.hljs-name,.hljs-selector-tag,.hljs-deletion,.hljs-subst{color:#e06c75}.hljs-literal{color:#56b6c2}.hljs-string,.hljs-regexp,.hljs-addition,.hljs-attribute,.hljs-meta-string{color:#98c379}.hljs-built_in,.hljs-class .hljs-title{color:#e6c07b}.hljs-attr,.hljs-variable,.hljs-template-variable,.hljs-type,.hljs-selector-class,.hljs-selector-attr,.hljs-selector-pseudo,.hljs-number{color:#d19a66}.hljs-symbol,.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-title{color:#61aeee}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:bold}.hljs-link{text-decoration:underline}

@@ -1,8 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-US">
 <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117847815-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-117847815-1');
+  </script>
+
   <meta charset="utf-8" />
   <title>Vicki | Control your computer with Alexa</title>
+  <meta name="description" content="Control your computer with any Amazon Alexa device like the Amazon Echo by installing Vicki" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
   <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/jpailehnpmjbaolepjhmfcoelefljcln">
@@ -51,6 +62,49 @@
       <div class="hero-lead">
         Control your computer through Alexa
       </div>
+
+      <div style="text-align: left; margin-top: 50px;">
+        <p class="lead text-center">
+          What can you do with Vicki?
+        </p>
+
+        <p class="feature-list" style="text-align: justify;">
+          <span>
+            Play music on your computer and control it through Alexa.
+          </span>
+          <span>
+            Start a game or app before you get to your desk.
+          </span>
+          <span>
+            Shutdown the computer from the comfort of your bed.
+          </span>
+          <span>
+            Do a PowerPoint presentation and have Alexa change the slides for you.
+          </span>
+          <span>
+            Have Alexa read aloud an article from a web page while you walk away from the screen.
+          </span>
+          <span>
+            Lock your computer before someone else messes with it.
+          </span>
+          <span>
+            Open that recipe you have bookmarked while you are in the middle of cooking.
+          </span>
+          <span>
+            Navigate the Internet hands free because your hands are occupied.
+          </span>
+          <span>
+            Dictate your next bestseller and have Alexa scribe it for you.
+          </span>
+          <span>
+            Level up your routine by voice activating it through Alexa.
+          </span>
+        </p>
+
+        <p class="lead text-center">
+          Extend Vicki with user created scripts and control any website or software through Alexa.
+        </p>
+      </div>
     </div>
   </section>
 
@@ -98,7 +152,7 @@
     <div class="container-narrow text-center">
       <h1><a name="scripts"></a>Scripts for Vicki</h1>
       <p class="lead">
-        Search the web for user created VickiScripts. Here are some good places to start.
+        Teach Vicki new tricks with user created VickiScripts, here are good places to find them.
         <hr />
         <div>
           <a href='https://github.com/search?l=JavaScript&q="%2F%2F+%3D%3DVickiScript%3D%3D"&type=Code' class="scripts-link"><img src="res/logo-github.svg" /></a>
@@ -117,7 +171,7 @@
 <a name="develop"></a>Write your own script</h1>
 
 <p class="lead">
-Write javascript to answer requests from Alexa on your browser. Here is an example.
+Write scripts to answer requests from Alexa on your browser. Here is an example.
 </p>
       <pre>
         <code class="javascript" style="text-align: left; border-radius: 4px; padding: 20px">/// ==VickiScript==
@@ -177,7 +231,7 @@ $vs.listen(/^hello$/, async (request, response) => {
 
 
       <p class="lead">2) Can I control multiple computers?</p>
-      <p>Yes, however each Alexa input device (echo) can only communicate with a single computer at a time. To set the preferred target computer say "Alexa, ask web browser to set my preferred vicki" and it will list all connected computers by a name. The name of each computer is listed inside browser extension.</p>
+      <p>Yes, however each Alexa input device (echo) can only communicate with a single computer at a time. To set the preferred target computer say "Alexa, ask web browser to set my preferred vicki" and it will list all connected computers by a name. The name of each computer is listed inside the browser extension's pop up.</p>
 
       <p class="lead">3) Can I control my computer from multiple echos?</p>
       <p>Yes, when you attempt to use your 2nd echo the computer will prompt you to add the echo as a trusted device.</p>
