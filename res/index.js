@@ -74,6 +74,7 @@
     page: createImage("page.jpg"),
     mario: createImage("mario.jpg"),
     pizza: createImage("pizza.jpg"),
+    youtube: createImage("youtube.jpg"),
     minecraft: createImage("minecraft.jpg"),
     spotifyLaunch: createImage("spotify-launch.jpg"),
     spotifyNext: createImage("spotify-next.jpg"),
@@ -85,22 +86,17 @@
 
   let previousImage = null;
   async function showImage(now, future, animateIn) {
-    if (now) {
-      now.style.display = "";
-      now.style.zIndex = 10;
-      
-      if (animateIn) {
-        now.style.animationName = "screen-animate-in";
-      }
+    now.style.display = "";
+    now.style.zIndex = 10;
+
+    if (animateIn) {
+      now.style.animationName = "screen-animate-in";
     }
  
     await wait(2);
 
     now.style.transition = "";
-
-    if (now) {
-      now.style.animationName = "";
-    }
+    now.style.animationName = "";
 
     if (previousImage) {
       previousImage.style.zIndex = 0;
@@ -133,7 +129,11 @@
     await hideCmd();
 
     await showCmd("open bookmark pizza");
-    await showImage(images.pizza, images.minecraft);
+    await showImage(images.pizza, images.youtube);
+    await hideCmd();
+
+    await showCmd("youtube candy mountain");
+    await showImage(images.youtube, images.minecraft);
     await hideCmd();
 
     await showCmd("launch Minecraft");
@@ -156,7 +156,7 @@
     await showImage(images.docWriteHW, images.docWriteH);
     await hideCmd();
 
-    await showCmd("erase word");
+    await showCmd("delete word");
     await showImage(images.docWriteH, images.docWriteHEEE);
     await hideCmd();
 
@@ -185,7 +185,7 @@ function configureInstallBrowserExtension() {
     if (typeof chrome == "object") {
       chrome.webstore.install();
     } else {
-      alert("This browser is not supported, try Chrome.");
+      alert("This browser is not supported, use Chrome on your desktop.");
     }
   });
 }
@@ -200,7 +200,9 @@ function configureInstallNativeAddon() {
   const downloadBtn = document.getElementById("enable-computer-btn");
 
   if (!downloadUrl) {
-    downloadBtn.addEventListener("click", () => {
+    downloadBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
       alert("Native addon is only supported on Windows and Mac. This is optional, so skip it.");
     });
   } else {
