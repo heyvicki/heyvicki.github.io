@@ -178,18 +178,6 @@ function getOS() {
   }
 }
 
-function configureInstallBrowserExtension() {
-  document.getElementById("enable-browser-btn").addEventListener("click", (e) => {
-    e.preventDefault();
-
-    if (typeof chrome == "object") {
-      chrome.webstore.install();
-    } else {
-      alert("This browser is not supported, use Chrome on your desktop.");
-    }
-  });
-}
-
 function configureInstallNativeAddon() {
   const downloadUrlPerOs = {
     win: "https://s3.amazonaws.com/heyvicki-public/vicki-native-addon.exe",
@@ -211,6 +199,5 @@ function configureInstallNativeAddon() {
 }
 
 (function registerInstallExtensionBtn() {
-  configureInstallBrowserExtension();
   configureInstallNativeAddon();
 })();
